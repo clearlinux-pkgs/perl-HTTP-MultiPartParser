@@ -4,7 +4,7 @@
 #
 Name     : perl-HTTP-MultiPartParser
 Version  : 0.02
-Release  : 7
+Release  : 8
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libh/libhttp-multipartparser-perl/libhttp-multipartparser-perl_0.02-1.debian.tar.xz
@@ -44,7 +44,7 @@ dev components for the perl-HTTP-MultiPartParser package.
 cd ..
 %setup -q -T -D -n HTTP-MultiPartParser-0.02 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/HTTP-MultiPartParser-0.02/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/HTTP-MultiPartParser-0.02/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
