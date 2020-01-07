@@ -4,13 +4,15 @@
 #
 Name     : perl-HTTP-MultiPartParser
 Version  : 0.02
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libh/libhttp-multipartparser-perl/libhttp-multipartparser-perl_0.02-1.debian.tar.xz
 Summary  : 'HTTP MultiPart Parser'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-HTTP-MultiPartParser-license = %{version}-%{release}
+Requires: perl-HTTP-MultiPartParser-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::Deep)
 
@@ -34,23 +36,42 @@ $parser->finish;
 Summary: dev components for the perl-HTTP-MultiPartParser package.
 Group: Development
 Provides: perl-HTTP-MultiPartParser-devel = %{version}-%{release}
+Requires: perl-HTTP-MultiPartParser = %{version}-%{release}
 
 %description dev
 dev components for the perl-HTTP-MultiPartParser package.
 
 
+%package license
+Summary: license components for the perl-HTTP-MultiPartParser package.
+Group: Default
+
+%description license
+license components for the perl-HTTP-MultiPartParser package.
+
+
+%package perl
+Summary: perl components for the perl-HTTP-MultiPartParser package.
+Group: Default
+Requires: perl-HTTP-MultiPartParser = %{version}-%{release}
+
+%description perl
+perl components for the perl-HTTP-MultiPartParser package.
+
+
 %prep
 %setup -q -n HTTP-MultiPartParser-0.02
-cd ..
-%setup -q -T -D -n HTTP-MultiPartParser-0.02 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libhttp-multipartparser-perl_0.02-1.debian.tar.xz
+cd %{_builddir}/HTTP-MultiPartParser-0.02
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/HTTP-MultiPartParser-0.02/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/HTTP-MultiPartParser-0.02/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -60,7 +81,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -68,6 +89,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-HTTP-MultiPartParser
+cp %{_builddir}/HTTP-MultiPartParser-0.02/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-HTTP-MultiPartParser/86a29cd3c0f33b096764475c24e17cc0c001f617
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -80,9 +103,16 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/HTTP/MultiPartParser.pm
-/usr/lib/perl5/vendor_perl/5.28.2/HTTP/MultiPartParser.pod
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/HTTP::MultiPartParser.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-HTTP-MultiPartParser/86a29cd3c0f33b096764475c24e17cc0c001f617
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/HTTP/MultiPartParser.pm
+/usr/lib/perl5/vendor_perl/5.30.1/HTTP/MultiPartParser.pod
