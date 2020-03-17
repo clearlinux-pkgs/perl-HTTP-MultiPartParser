@@ -4,7 +4,7 @@
 #
 Name     : perl-HTTP-MultiPartParser
 Version  : 0.02
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libh/libhttp-multipartparser-perl/libhttp-multipartparser-perl_0.02-1.debian.tar.xz
@@ -90,7 +90,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-HTTP-MultiPartParser
-cp %{_builddir}/HTTP-MultiPartParser-0.02/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-HTTP-MultiPartParser/86a29cd3c0f33b096764475c24e17cc0c001f617
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-HTTP-MultiPartParser/86a29cd3c0f33b096764475c24e17cc0c001f617
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -114,5 +114,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/HTTP/MultiPartParser.pm
-/usr/lib/perl5/vendor_perl/5.30.1/HTTP/MultiPartParser.pod
+/usr/lib/perl5/vendor_perl/5.30.2/HTTP/MultiPartParser.pm
+/usr/lib/perl5/vendor_perl/5.30.2/HTTP/MultiPartParser.pod
