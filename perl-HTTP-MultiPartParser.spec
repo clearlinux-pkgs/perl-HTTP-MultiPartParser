@@ -4,7 +4,7 @@
 #
 Name     : perl-HTTP-MultiPartParser
 Version  : 0.02
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHANSEN/HTTP-MultiPartParser-0.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libh/libhttp-multipartparser-perl/libhttp-multipartparser-perl_0.02-1.debian.tar.xz
@@ -114,5 +114,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/HTTP/MultiPartParser.pm
-/usr/lib/perl5/vendor_perl/5.30.2/HTTP/MultiPartParser.pod
+/usr/lib/perl5/vendor_perl/5.30.3/HTTP/MultiPartParser.pm
+/usr/lib/perl5/vendor_perl/5.30.3/HTTP/MultiPartParser.pod
